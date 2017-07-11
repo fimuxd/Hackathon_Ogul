@@ -13,7 +13,7 @@ class DataCenter {
     static let shared:DataCenter = DataCenter.init()
     
     private var userArray:[User]!
-    private var user:[Capsule]!
+  
     private var userId:[[String:Any]] = [[:]]
     
     var dataArray:[User] {
@@ -60,8 +60,8 @@ class DataCenter {
 
     //보영
     private func parseCapsules(_ array:[[String:Any]]) {
-        self.user = array.map({ (dictionary:[String:Any]) -> Capsule in
-            return Capsule.init(data: dictionary)
+        self.userArray = array.map({ (dictionary: [String:Any]) -> User in
+            return User.init(dictionary: dictionary)
             
         })
         
