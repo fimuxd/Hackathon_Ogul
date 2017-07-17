@@ -37,13 +37,13 @@ struct User {
         self.userEmail = dictionary[Authentification.plistEmail] as! String
         self.userPassword = dictionary[Authentification.plistPassword] as! String
         self.userId = dictionary[Authentification.plistId] as! Int
-        self.userData = [] //펄슨데이터가 하나씩 채워진다?
+        self.userData = []
     
     
         
         if let container:[[String:Any]] = dictionary[Authentification.plistUserData] as? [[String:Any]] {
-            for personData in container{
-                userData.append(Capsule.init(data: personData))
+            for capsuleData in container{
+                userData.append(Capsule.init(data: capsuleData))
             }
         }
     }
@@ -51,6 +51,9 @@ struct User {
     
     
 }
+
+
+
 
 struct Capsule {
     let capsuleMemo:String
@@ -60,11 +63,15 @@ struct Capsule {
     var dictionary: [String:Any]{
         return [Authentification.plistCapsuleMemo:capsuleMemo,Authentification.plistCapsuleImg:capsuleImg,Authentification.plistCapsuleDate:capslueDate]
     }
-    
+    //스트럭트 내용을 딕셔너리로 바꾸는 연산을 하기위한 연산프로퍼티
+    //셋은 파라미터같은느낌
     init(data:[String:Any]){
         self.capsuleMemo = data[Authentification.plistCapsuleMemo] as! String
         self.capsuleImg = data[Authentification.plistCapsuleImg] as! String
         self.capslueDate = data[Authentification.plistCapsuleDate] as! Int
         
     }
+    
+   
 }
+

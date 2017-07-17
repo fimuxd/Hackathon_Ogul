@@ -12,15 +12,26 @@ class DataCenter {
     
     static let shared:DataCenter = DataCenter.init()
     
+    // User Array
     private var userArray:[User]!
-  
-    private var userId:[[String:Any]] = [[:]]
     
     var dataArray:[User] {
         get{
             return userArray
         }
     }
+    
+    // User
+    private var user:User?
+    
+    var currentUser: User {
+        get {
+            return user!
+        }
+    }
+    
+//    private var capsule:[Capsule]?
+//    private var userId:[[String:Any]] = [[:]]
     
     private let fileManager:FileManager = FileManager()
     private let docPath:String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last! + "/Capslets.plist"
@@ -55,7 +66,6 @@ class DataCenter {
             return User.init(dictionary: dictionary)
             
         })
-        
     }
 
     //보영
@@ -64,34 +74,61 @@ class DataCenter {
             return User.init(dictionary: dictionary)
             
         })
-        
     }
 
     private func saveToDoc() {
         print("savaDo\(userArray)")
         let nsArray:NSArray = NSArray.init(array: self.userArray.map({ (user:User) -> [String:Any] in
             return user.dictionary
-            
         }))
         nsArray.write(toFile: docPath, atomically: true)
-        print(nsArray)
     }
     
+    // User 추가
     func addUser(_ dict:[String:Any]) {
         
         self.userArray.append(User.init(dictionary: dict))
         self.saveToDoc()
-        
     }
     
-    func loadUser(){
-        userId = UserDefaults.standard.array(forKey: "User_List") as! [[String : Any]]
+    func editUser() {
+        
+        self.userArray[currentUser.userId] = user!
+        
+        print("Edit User .......................")
+        print(userArray)
     }
     
-    func addData(_ dict:[String:Any]){
+    // User 설정
+    func setUser() {
         
-//               self.user.append(Capsule.init(data: dict)) 테스트
+        let userEmail = UserDefaults.standard.object(forKey: "currentUser") as! String
+        
+        for index in userArray {
+            if index.userEmail == userEmail {
+                user = index
+            }
+        }
+    }
+    
+    // Capsule 추가
+    func addCapsuleData(_ dict: [String: Any]) {
+        print("**********************",dict)
+        
+        print("user Array .......................")
+        print(userArray)
+        
+        print("User ...................")
+        print(user)
+        
+        user?.userData.append(Capsule(data: dict))
+        
         self.saveToDoc()
+        
+        print("user.usreDAta ...............................")
+        print(user?.userData)
+        
+        editUser()
     }
     
 }

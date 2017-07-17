@@ -42,8 +42,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getUserData()
+        getCurrentUser()
         
+        
+        
+        getUserData()
         
         self.tableView.reloadData()
         
@@ -61,6 +64,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     /****************************************/
     
     //    var isAuthentified:Bool = UserDefaults.standard.bool(forKey: Authentification.authentificationBool)
+    
+    var currentUser: User!
+    
+    
     
     var userID:Int?
     
@@ -101,6 +108,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         //            return 1
         //        }else{
         return memoList.count
+//        return currentUser.userData.count
         //        }
     }
     
@@ -111,6 +119,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             return diaryCell
         }else{
             let lockedCell:LockedDiaryCell = tableView.dequeueReusableCell(withIdentifier: Authentification.idForLockedCell, for: indexPath) as! LockedDiaryCell
+            
             return lockedCell
         }
         
@@ -141,6 +150,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     //UserDataList 를 불러와
     func getUserData() {
         self.currentUserArray = DataCenter.shared.dataArray
+    }
+
+    func getCurrentUser() {
+        currentUser = DataCenter.shared.currentUser
     }
     
     

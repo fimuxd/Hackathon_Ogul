@@ -76,6 +76,14 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
                     let currentUserID = userData.userId
                     nextViewController.userID = currentUserID
                     
+                    /////////////////////////////////////////////////////////////////////////////////////////////
+                    UserDefaults.standard.set(inputEmailTextField.text, forKey: "currentUser")
+                    
+                    DataCenter.shared.setUser()
+                    print("Set User ...........")
+                    print(DataCenter.shared.currentUser)
+                    ///////////////////////////////////////////////////////////////////////////////////////////////
+                    
                     self.navigationController?.pushViewController(nextViewController, animated: true)
                     
                 default:

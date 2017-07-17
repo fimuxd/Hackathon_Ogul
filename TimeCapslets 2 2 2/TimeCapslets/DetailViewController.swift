@@ -46,6 +46,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     private var currentUserArray:[User]!
     var userID:Int?
     
+    
     /****************************************/
     //           IBAction | Methods          //
     /****************************************/
@@ -59,6 +60,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     
     //ImagePicker 구현하고 싶었지만 시간 부족
     @IBAction func imageSaveBtnAction(_ sender: UIButton) {
+        
     }
     
     
@@ -103,14 +105,19 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         if !(self.contentTextField.text!.isEmpty) {
             let addedContent:String = contentTextField.text!
 
-            var memoList = UserDefaults.standard.array(forKey: "\(self.userID!) memoList") as? [[String:Any]] ?? [[:]]
+//            var memoList = UserDefaults.standard.array(forKey: "\(self.userID!) memoList") as? [[String:Any]] ?? [[:]]
+//            
+//            let memo: [String:Any] = ["memoDate":count+1, "content":addedContent]
+//            
+//            memoList.append(memo)
+//            UserDefaults.standard.set(memoList, forKey: "\(self.userID!) memoList")
+//            
+//            count += 1
             
-            let memo: [String:Any] = ["memoDate":count+1, "content":addedContent]
             
-            memoList.append(memo)
-            UserDefaults.standard.set(memoList, forKey: "\(self.userID!) memoList")
             
-            count += 1
+            DataCenter.shared.addCapsuleData([Authentification.plistCapsuleMemo:contentTextField.text,Authentification.plistCapsuleImg:"a",Authentification.plistCapsuleDate:200])
+            
         }
         
     }
@@ -133,4 +140,5 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     func getUserData() {
         self.currentUserArray = DataCenter.shared.dataArray
     }
+
 }
