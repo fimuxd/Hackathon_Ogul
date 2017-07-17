@@ -37,6 +37,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
+    // 현재 유저 변수: 로그인하면 자동으로 유저가 설정되기 때문에 !를 붙였음.
     private var currentUserArray:[User]!
     
     /****************************************/
@@ -50,24 +51,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     
     
-//    func userIdList(){
-//        var userId:[String:Any] = [:]
-//        
-//        
-//        userId.updateValue(inputNewEmailTextField.text!, forKey: "User_Id")
-//        
-//        
-//        var userList:[Any] = UserDefaults.standard.array(forKey: "User_List") ?? []
-//        userList.append(userId)
-//        
-//        UserDefaults.standard.set(userList, forKey: "User_List")
-//    }
+
     
     //-----새로운 유저를 등록하는 함수
     func registerNewUser() {
         self.view.endEditing(true)
         
         if !(inputNewEmailTextField.text?.isEmpty)! && !(inputNewPasswordTextField.text?.isEmpty)! && inputNewPasswordTextField.text! == inputConfirmPasswordTextField.text! {
+            
+            
             
             DataCenter.shared.addUser([Authentification.plistId:DataCenter.shared.dataArray.count,
                                        Authentification.plistEmail:self.inputNewEmailTextField.text!,
@@ -139,7 +131,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         self.scrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
     }
     
+    
+    /////////////////////////////////////////////////////////////////////////////////////
+    // 유저 데이터 로드
     func getUserData() {
         self.currentUserArray = DataCenter.shared.dataArray
     }
+    /////////////////////////////////////////////////////////////////////////////////////
 }

@@ -90,7 +90,7 @@ class DataCenter {
     
     func addData(_ dict:[String:Any]){
         
-//               self.user.append(Capsule.init(data: dict))
+//               self.user.append(Capsule.init(data: dict)) 테스트
         self.saveToDoc()
     }
     
