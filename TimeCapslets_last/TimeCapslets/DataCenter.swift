@@ -58,7 +58,6 @@ class DataCenter {
         
     }
 
-    //보영
     private func parseCapsules(_ array:[[String:Any]]) {
         self.user = array.map({ (dictionary:[String:Any]) -> Capsule in
             return Capsule.init(data: dictionary)
@@ -81,17 +80,21 @@ class DataCenter {
         
         self.userArray.append(User.init(dictionary: dict))
         self.saveToDoc()
+    
+    }
+    
+    func loadMemoDatas(for userID:Int) -> [Capsule] {
+        
+        var user = self.userArray[userID]
+        
+        return user.userData
+    }
+    
+    func addMemo(_ dict:[String:Any]) {
+        self.user.append(Capsule.init(data: dict))
         
     }
     
-    func loadUser(){
-        userId = UserDefaults.standard.array(forKey: "User_List") as! [[String : Any]]
-    }
     
-    func addData(_ dict:[String:Any]){
-        
-//               self.user.append(Capsule.init(data: dict))
-        self.saveToDoc()
-    }
     
 }

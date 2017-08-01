@@ -16,17 +16,14 @@ struct User {
     let userId:Int
     var userData:[Capsule]
     
-    
     var dictionary:[String:Any]{
         get{
             
             var tempData:[[String:Any]] = []
             
-            
             for capsule in userData{
                 tempData.append(capsule.dictionary)
             }
-            
             
             return[Authentification.plistEmail:userEmail,Authentification.plistPassword:userPassword,Authentification.plistId:userId,Authentification.plistUserData:tempData]
         }
@@ -38,9 +35,7 @@ struct User {
         self.userPassword = dictionary[Authentification.plistPassword] as! String
         self.userId = dictionary[Authentification.plistId] as! Int
         self.userData = [] //펄슨데이터가 하나씩 채워진다?
-    
-    
-        
+
         if let container:[[String:Any]] = dictionary[Authentification.plistUserData] as? [[String:Any]] {
             for personData in container{
                 userData.append(Capsule.init(data: personData))
