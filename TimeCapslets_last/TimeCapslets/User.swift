@@ -25,7 +25,10 @@ struct User {
                 tempData.append(capsule.dictionary)
             }
             
-            return[Authentification.plistEmail:userEmail,Authentification.plistPassword:userPassword,Authentification.plistId:userId,Authentification.plistUserData:tempData]
+            return[Authentification.plistEmail:userEmail,
+                   Authentification.plistPassword:userPassword,
+                   Authentification.plistId:userId,
+                   Authentification.plistUserData:tempData]
         }
     }
     
@@ -35,7 +38,7 @@ struct User {
         self.userPassword = dictionary[Authentification.plistPassword] as! String
         self.userId = dictionary[Authentification.plistId] as! Int
         self.userData = [] //펄슨데이터가 하나씩 채워진다?
-
+        
         if let container:[[String:Any]] = dictionary[Authentification.plistUserData] as? [[String:Any]] {
             for personData in container{
                 userData.append(Capsule.init(data: personData))
@@ -53,7 +56,9 @@ struct Capsule {
     let capslueDate:Int
     
     var dictionary: [String:Any]{
-        return [Authentification.plistCapsuleMemo:capsuleMemo,Authentification.plistCapsuleImg:capsuleImg,Authentification.plistCapsuleDate:capslueDate]
+        return [Authentification.plistCapsuleMemo:capsuleMemo,
+                Authentification.plistCapsuleImg:capsuleImg,
+                Authentification.plistCapsuleDate:capslueDate]
     }
     
     init(data:[String:Any]){
